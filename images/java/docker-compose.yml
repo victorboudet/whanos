@@ -1,0 +1,16 @@
+services:
+  base_image:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    container_name: whanos-java
+
+  standalone_image:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    container_name: whanos-java-standalone
+    depends_on:
+      - base_image
+    ports:
+      - "8080:8080"

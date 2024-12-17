@@ -1,0 +1,14 @@
+FROM whanos-c AS builder
+
+SHELL ["/bin/bash", "-c"]
+COPY . /app
+WORKDIR /app
+RUN make
+
+FROM alpine:3.15
+RUN apk add bash
+SHELL ["/bin/bash", "-c"]
+RUN apk add libc6-compat
+COPY --from=builder /app /app
+WORKDIR /app
+CMD ["./compiled-app"]

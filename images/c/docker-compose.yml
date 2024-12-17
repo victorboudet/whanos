@@ -1,0 +1,18 @@
+services:
+  base_image:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    container_name: whanos-c
+
+  standalone_image:
+    build:
+      context: .
+      dockerfile: Dockerfile.standalone
+      args:
+        BASE_IMAGE: whanos-c
+    container_name: whanos-c-standalone
+    depends_on:
+      - base_image
+    ports:
+      - "8080:8080"

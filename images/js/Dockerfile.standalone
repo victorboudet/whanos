@@ -1,0 +1,7 @@
+FROM whanos-javascript
+
+SHELL ["/bin/bash", "-c"]
+COPY . /app
+WORKDIR /app
+RUN npm install
+CMD [ "node", "." ]

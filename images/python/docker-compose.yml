@@ -1,0 +1,16 @@
+services:
+  base_image:
+    build:
+      context: .
+      dockerfile: Dockerfile.base
+    container_name: whanos-python
+
+  standalone_image:
+    build:
+      context: .
+      dockerfile: Dockerfile.standalone
+    container_name: whanos-python-standalone
+    depends_on:
+      - base_image
+    ports:
+      - "8080:8080"
